@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Imposter Game</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Screen 1: Setup -->
+        <section id="setup-screen" class="screen active">
+            <h1 class="logo">Imposter Game</h1>
+            
+            <div class="setup-group">
+                <label>Players</label>
+                <div class="counter-control">
+                    <button id="btn-player-minus" class="icon-btn">-</button>
+                    <span id="player-count">3</span>
+                    <button id="btn-player-plus" class="icon-btn">+</button>
+                </div>
+            </div>
+
+            <div class="setup-group">
+                <label>Imposters</label>
+                <div class="counter-control">
+                    <button id="btn-imposter-minus" class="icon-btn">-</button>
+                    <span id="imposter-count">1</span>
+                    <button id="btn-imposter-plus" class="icon-btn">+</button>
+                </div>
+            </div>
+
+            <div class="setup-group">
+                <label>Category</label>
+                <select id="category-select">
+                    <!-- Populated by JS -->
+                </select>
+            </div>
+
+            <button id="btn-start" class="primary-btn">Start Game</button>
+        </section>
+
+        <!-- Screen 2: Pass & Reveal -->
+        <section id="reveal-screen" class="screen hidden">
+            <div class="card-container">
+                <div class="card" id="role-card">
+                    <div class="card-front">
+                        <div class="icon-eye">👁️</div>
+                        <h2>Player <span id="current-player-num">1</span></h2>
+                        <p>Tap to reveal your role</p>
+                    </div>
+                    <div class="card-back">
+                        <h2 id="role-text">WORD</h2>
+                        <p id="role-subtext">Remember it!</p>
+                        <button id="btn-next-player" class="secondary-btn">Next Player</button>
+                    </div>
+                </div>
+            </div>
+            <p class="instruction">Pass the device to the next player</p>
+        </section>
+
+        <!-- Screen 3: Playing / Voting -->
+        <section id="game-screen" class="screen hidden">
+            <div class="game-header">
+                <h2>Discuss!</h2>
+                <div class="timer" id="timer">00:00</div>
+            </div>
+            
+            <div class="game-content">
+                <p>Find the Imposter among you.</p>
+                <div id="players-grid" class="players-grid">
+                    <!-- Player avatars/status -->
+                </div>
+            </div>
+
+            <button id="btn-end-game" class="danger-btn">End Game</button>
+        </section>
+
+        <!-- Screen 4: Results -->
+        <section id="result-screen" class="screen hidden">
+            <h1>Game Over</h1>
+            <div id="result-details">
+                <!-- Winner & Imposter Reveal -->
+            </div>
+            <button id="btn-play-again" class="primary-btn">Play Again</button>
+        </section>
+    </div>
+
+    <script type="module" src="script.js"></script>
+</body>
+</html>

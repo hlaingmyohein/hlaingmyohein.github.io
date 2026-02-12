@@ -1,0 +1,301 @@
+:root {
+    --bg-color: #0d0d12;
+    --card-bg: #1a1a24;
+    --primary-color: #7f13ec;
+    --primary-hover: #9f4cf7;
+    --text-color: #ffffff;
+    --text-muted: #a0a0b0;
+    --danger-color: #ff4757;
+    --success-color: #2ed573;
+    
+    --font-family: 'Plus Jakarta Sans', sans-serif;
+    --radius: 16px;
+    --shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    --glow: 0 0 20px rgba(127, 19, 236, 0.4);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: var(--font-family);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+.app-container {
+    width: 100%;
+    max-width: 480px;
+    height: 100vh;
+    background: radial-gradient(circle at top right, rgba(127, 19, 236, 0.1), transparent 40%);
+    position: relative;
+    overflow-y: auto;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Screen Transitions */
+.screen {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    opacity: 1;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.screen.hidden {
+    display: none;
+    opacity: 0;
+    pointer-events: none;
+    transform: scale(0.95);
+}
+
+.screen.active {
+    display: flex;
+    animation: fadeIn 0.4s forwards;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.98); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+/* Typography */
+h1 {
+    font-weight: 800;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    text-align: center;
+    background: linear-gradient(135deg, #fff 0%, #a0a0b0 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+h2 {
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+p {
+    color: var(--text-muted);
+    text-align: center;
+    line-height: 1.6;
+}
+
+/* Controls */
+button {
+    font-family: inherit;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.primary-btn {
+    background: var(--primary-color);
+    color: white;
+    font-weight: 700;
+    padding: 16px 32px;
+    border-radius: var(--radius);
+    width: 100%;
+    font-size: 1.1rem;
+    box-shadow: var(--glow);
+    margin-top: auto;
+}
+
+.primary-btn:active {
+    transform: scale(0.98);
+    box-shadow: 0 0 10px rgba(127, 19, 236, 0.2);
+}
+
+.secondary-btn {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    padding: 12px 24px;
+    border-radius: var(--radius);
+    font-weight: 600;
+    margin-top: 20px;
+}
+
+.danger-btn {
+    background: rgba(255, 71, 87, 0.1);
+    color: var(--danger-color);
+    padding: 14px 28px;
+    border-radius: var(--radius);
+    font-weight: 600;
+    width: 100%;
+    margin-top: auto;
+    border: 1px solid rgba(255, 71, 87, 0.3);
+}
+
+/* Setup Screen */
+.setup-group {
+    width: 100%;
+    background: var(--card-bg);
+    padding: 20px;
+    border-radius: var(--radius);
+    margin-bottom: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.setup-group label {
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+.counter-control {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: rgba(0,0,0,0.2);
+    padding: 4px;
+    border-radius: 12px;
+}
+
+.icon-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background: rgba(255,255,255,0.1);
+    color: white;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon-btn:active {
+    background: var(--primary-color);
+}
+
+#player-count, #imposter-count {
+    font-weight: 700;
+    font-size: 1.2rem;
+    min-width: 24px;
+    text-align: center;
+}
+
+select {
+    background: transparent;
+    border: none;
+    color: var(--text-color);
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 600;
+    text-align: right;
+    cursor: pointer;
+    outline: none;
+}
+
+/* Reveal Screen - Card Flip */
+.card-container {
+    perspective: 1000px;
+    width: 100%;
+    height: 360px;
+    margin-bottom: 32px;
+}
+
+.card {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transform-style: preserve-3d;
+    cursor: pointer;
+}
+
+.card.flipped {
+    transform: rotateY(180deg);
+}
+
+.card-front, .card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 32px;
+    background: linear-gradient(145deg, #1f1f2e, #16161f);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+}
+
+.card-front {
+    color: var(--text-color);
+}
+
+.card-back {
+    transform: rotateY(180deg);
+    background: linear-gradient(145deg, #2a1f3d, #1a1a24);
+    border: 1px solid var(--primary-color);
+}
+
+.icon-eye {
+    font-size: 4rem;
+    margin-bottom: 24px;
+    opacity: 0.8;
+}
+
+#role-text {
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin-bottom: 8px;
+    text-shadow: 0 0 20px rgba(127, 19, 236, 0.3);
+}
+
+/* Game Screen */
+.timer {
+    font-size: 3rem;
+    font-weight: 800;
+    font-variant-numeric: tabular-nums;
+    margin: 32px 0;
+    color: var(--text-muted);
+}
+
+.players-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+    gap: 16px;
+    width: 100%;
+    margin-top: 32px;
+}
+
+.player-avatar {
+    background: rgba(255,255,255,0.05);
+    border-radius: 12px;
+    padding: 12px;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+/* Results */
+#result-details {
+    margin: 32px 0;
+    text-align: center;
+}
+
+.result-role {
+    font-size: 1.5rem;
+    margin: 8px 0;
+    color: var(--primary-color);
+}
